@@ -8,10 +8,10 @@ exports.addProduct = async (req, res) => {
     const { name, description, price, vendor } = req.body;
 
     const product = await Product.create({
-      name,
-      description,
-      price,
-      vendor
+      name:req.body.name,
+      description:req.body.description,
+      price:req.body.price,
+      vendor:req.user._id   // 🔥 Important
     });
 
     res.status(201).json(product);
