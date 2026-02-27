@@ -9,36 +9,40 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import GuestList from "./pages/GuestList";
 import OrderStatus from "./pages/OrderStatus";
-
+import VendorProducts from "./pages/VendorProducts";
+import AddProduct from "./pages/AddProduct";
+import Transactions from "./pages/Transactions";
 function App() {
 
-  return (
-    <Router>
+    return (
+        <Router>
 
-      <Routes>
+            <Routes>
 
-        <Route path="/" element={<Login />} />
+                <Route path="/" element={<Login />} />
 
-        <Route path="/register" element={<Register />} />
+                <Route path="/register" element={<Register />} />
 
-        <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin" element={<AdminDashboard />} />
 
-        <Route path="/vendor" element={<VendorDashboard />} />
+                <Route path="/vendor" element={<VendorDashboard />} />
 
-        <Route path="/user" element={<UserDashboard />} />
+                <Route path="/user" element={<UserDashboard />} />
 
-        <Route path="/cart" element={<Cart />} />
+                <Route path="/cart" element={<Cart />} />
 
-        <Route path="/checkout" element={<Checkout />} />
+                <Route path="/checkout" element={<Checkout />} />
 
-        <Route path="/guests" element={<GuestList />} />
+                <Route path="/guests" element={<GuestList />} />
 
-        <Route path="/orders" element={<OrderStatus />} />
+                <Route path="/orders" element={<OrderStatus />} />
+                <Route path="/vendor/products" element={<VendorProducts />} />
+                <Route path="/vendor/add-product" element={<AddProduct />} />
+                <Route path="/vendor/transactions" element={<Transactions />} />
+            </Routes>
 
-      </Routes>
-
-    </Router>
-  );
+        </Router>
+    );
 
 }
 
