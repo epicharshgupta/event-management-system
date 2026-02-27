@@ -7,6 +7,7 @@ const productRoutes = require("./routes/productRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const guestRoutes = require("./routes/guestRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 dotenv.config();
 connectDB();
 
@@ -20,7 +21,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/guests", guestRoutes);
-
+app.use("/api/admin", adminRoutes);
 app.get("/", (req, res) => {
   res.send("Event Management API Running");
 });
