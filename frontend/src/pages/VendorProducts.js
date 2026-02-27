@@ -6,17 +6,26 @@ function VendorProducts() {
   const [products, setProducts] = useState([]);
 
   const fetchProducts = async () => {
-
     try {
-
       const res = await API.get("/products/vendor");
-
       setProducts(res.data);
-
     } catch (error) {
       console.log(error);
     }
+  };
 
+  const handleDelete = async (id) => {
+    try {
+
+      await API.delete(`/products/${id}`);
+
+      alert("Product Deleted");
+
+      fetchProducts(); // 🔥 refresh list
+
+    } catch (error) {
+      alert("Error deleting product");
+    }
   };
 
   useEffect(() => {
@@ -24,7 +33,6 @@ function VendorProducts() {
   }, []);
 
   return (
-
     <div>
 
       <h2>Your Items</h2>
@@ -39,14 +47,17 @@ function VendorProducts() {
             <p>{product.description}</p>
             <p>₹ {product.price}</p>
 
-            <hr/>
+            <button onClick={() => handleDelete(product._id)}>
+              Delete
+            </button>
+
+            <hr />
 
           </div>
         ))
       )}
 
     </div>
-
   );
 }
 
