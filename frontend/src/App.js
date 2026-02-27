@@ -12,6 +12,7 @@ import OrderStatus from "./pages/OrderStatus";
 import VendorProducts from "./pages/VendorProducts";
 import AddProduct from "./pages/AddProduct";
 import Transactions from "./pages/Transactions";
+import UpdateProduct from "./pages/UpdateProduct";
 function App() {
 
     return (
@@ -39,6 +40,7 @@ function App() {
                 <Route path="/vendor/products" element={<VendorProducts />} />
                 <Route path="/vendor/add-product" element={<AddProduct />} />
                 <Route path="/vendor/transactions" element={<Transactions />} />
+                <Route path="/vendor/update/:id" element={<UpdateProduct />} />
             </Routes>
 
         </Router>
