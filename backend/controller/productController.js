@@ -1,0 +1,52 @@
+const Product = require("../models/Product");
+
+
+// Add Product
+exports.addProduct = async (req, res) => {
+  try {
+
+    const { name, description, price, vendor } = req.body;
+
+    const product = await Product.create({
+      name,
+      description,
+      price,
+      vendor
+    });
+
+    res.status(201).json(product);
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+
+// Get All Products
+exports.getProducts = async (req, res) => {
+  try {
+
+    const products = await Product.find().populate("vendor", "name email");
+
+    res.json(products);
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+
+// Delete Product
+exports.deleteProduct = async (req, res) => {
+  try {
+
+    await Product.findByIdAndDelete(req.params.id);
+
+    res.json({ message: "Product deleted successfully" });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
