@@ -94,3 +94,20 @@ exports.updateOrderStatus = async (req, res) => {
   }
 
 };
+
+// Cancel Order
+exports.cancelOrder = async (req,res)=>{
+
+  try{
+
+    const order = await Order.findByIdAndDelete(req.params.id);
+
+    res.json({message:"Order cancelled"});
+
+  }catch(error){
+
+    res.status(500).json({error:error.message});
+
+  }
+
+};
