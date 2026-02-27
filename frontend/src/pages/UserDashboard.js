@@ -7,8 +7,8 @@ function UserDashboard() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
+  // Fetch all products
   const fetchProducts = async () => {
-
     try {
 
       const res = await API.get("/products");
@@ -17,6 +17,25 @@ function UserDashboard() {
 
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  // Add to cart
+  const handleAddToCart = async (productId) => {
+
+    try {
+
+      await API.post("/cart/add", {
+        product: productId,
+        quantity: 1
+      });
+
+      alert("Added to Cart");
+
+    } catch (error) {
+
+      alert("Error adding to cart");
+
     }
 
   };
@@ -31,7 +50,7 @@ function UserDashboard() {
 
       <h1>User Dashboard</h1>
 
-      <button onClick={()=>navigate("/cart")}>
+      <button onClick={() => navigate("/cart")}>
         Go To Cart
       </button>
 
@@ -42,17 +61,19 @@ function UserDashboard() {
       ) : (
         products.map((product) => (
 
-          <div key={product._id}>
+          <div key={product._id} style={{ marginBottom: "20px" }}>
 
             <h3>{product.name}</h3>
+
             <p>{product.description}</p>
+
             <p>₹ {product.price}</p>
 
-            <button>
+            <button onClick={() => handleAddToCart(product._id)}>
               Add To Cart
             </button>
 
-            <hr/>
+            <hr />
 
           </div>
 

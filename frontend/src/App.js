@@ -13,6 +13,10 @@ import VendorProducts from "./pages/VendorProducts";
 import AddProduct from "./pages/AddProduct";
 import Transactions from "./pages/Transactions";
 import UpdateProduct from "./pages/UpdateProduct";
+import UserOrders from "./pages/UserOrders";
+import AdminUsers from "./pages/AdminUsers";
+import AdminVendors from "./pages/AdminVendors";
+import Membership from "./pages/Membership";
 function App() {
 
     return (
@@ -41,6 +45,10 @@ function App() {
                 <Route path="/vendor/add-product" element={<AddProduct />} />
                 <Route path="/vendor/transactions" element={<Transactions />} />
                 <Route path="/vendor/update/:id" element={<UpdateProduct />} />
+                <Route path="/user/orders" element={<UserOrders />} />
+                <Route path="/admin/users" element={<AdminUsers />} />
+<Route path="/admin/vendors" element={<AdminVendors />} />
+<Route path="/admin/membership" element={<Membership />} />
             </Routes>
 
         </Router>
