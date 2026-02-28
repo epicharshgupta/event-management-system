@@ -21,6 +21,10 @@ const membershipSchema = new mongoose.Schema({
 
   expiryDate: {
     type: Date
+  },
+  membership: {
+    type: String,
+    default: null
   }
 
 });
