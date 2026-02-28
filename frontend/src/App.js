@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -17,11 +18,13 @@ import UserOrders from "./pages/UserOrders";
 import AdminUsers from "./pages/AdminUsers";
 import AdminVendors from "./pages/AdminVendors";
 import Membership from "./pages/Membership";
+import Navbar from "./components/Navbar";
 function App() {
 
     return (
-        <Router>
 
+        <Router>
+            <Navbar />
             <Routes>
 
                 <Route path="/" element={<Login />} />
@@ -47,13 +50,26 @@ function App() {
                 <Route path="/vendor/update/:id" element={<UpdateProduct />} />
                 <Route path="/user/orders" element={<UserOrders />} />
                 <Route path="/admin/users" element={<AdminUsers />} />
-<Route path="/admin/vendors" element={<AdminVendors />} />
-<Route path="/admin/membership" element={<Membership />} />
+                <Route path="/admin/vendors" element={<AdminVendors />} />
+                <Route path="/admin/membership" element={<Membership />} />
             </Routes>
-
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                theme="colored"
+            />
         </Router>
     );
 
 }
 
 export default App;
+// function App() {
+//   return (
+//     <div className="bg-red-500 text-white text-4xl p-10">
+//       Tailwind Test
+//     </div>
+//   );
+// }
+
+// export default App;
