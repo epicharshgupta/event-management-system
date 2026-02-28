@@ -1,31 +1,43 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
+import { toast } from "react-toastify";
 
 function VendorProducts() {
 
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
-  // Fetch vendor products
   const fetchProducts = async () => {
     try {
+
       const res = await API.get("/products/vendor");
+
       setProducts(res.data);
+
     } catch (error) {
+
       console.log("Error fetching products", error);
+
     }
   };
 
-  // Delete product
   const handleDelete = async (id) => {
+
     try {
+
       await API.delete(`/products/${id}`);
-      alert("Product Deleted");
-      fetchProducts(); // refresh list
+
+      toast.success("Product Deleted");
+
+      fetchProducts();
+
     } catch (error) {
-      alert("Error deleting product");
+
+      toast.warning("Error deleting product");
+
     }
+
   };
 
   useEffect(() => {
@@ -33,40 +45,70 @@ function VendorProducts() {
   }, []);
 
   return (
-    <div>
 
-      <h2>Your Items</h2>
+    <div className="min-h-screen bg-gray-100 p-20">
+
+      <h2 className="text-3xl font-bold mb-8">
+        Your Products
+      </h2>
 
       {products.length === 0 ? (
-        <p>No Products Found</p>
+
+        <p className="text-gray-500">
+          No Products Found
+        </p>
+
       ) : (
-        products.map((product) => (
-          <div key={product._id} style={{ marginBottom: "20px" }}>
 
-            <h3>{product.name}</h3>
-            <p>{product.description}</p>
-            <p>₹ {product.price}</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            <button
-              onClick={() => navigate(`/vendor/update/${product._id}`)}
-              style={{ marginRight: "10px" }}
+          {products.map((product) => (
+
+            <div
+              key={product._id}
+              className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition"
             >
-              Update
-            </button>
 
-            <button
-              onClick={() => handleDelete(product._id)}
-            >
-              Delete
-            </button>
+              <h3 className="text-xl font-semibold mb-2">
+                {product.name}
+              </h3>
 
-            <hr />
+              <p className="text-gray-500 mb-4">
+                {product.description}
+              </p>
 
-          </div>
-        ))
+              <p className="text-lg font-bold text-blue-600 mb-4">
+                ₹ {product.price}
+              </p>
+
+              <div className="flex gap-3">
+
+                <button
+                  onClick={() => navigate(`/vendor/update/${product._id}`)}
+                  className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+                >
+                  Update
+                </button>
+
+                <button
+                  onClick={() => handleDelete(product._id)}
+                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                >
+                  Delete
+                </button>
+
+              </div>
+
+            </div>
+
+          ))}
+
+        </div>
+
       )}
 
     </div>
+
   );
 }
 
