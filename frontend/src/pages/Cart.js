@@ -16,7 +16,9 @@ function Cart() {
       setItems(res.data);
 
     }catch(error){
+
       console.log(error);
+
     }
 
   };
@@ -34,39 +36,109 @@ function Cart() {
       fetchCart();
 
     }catch(error){
+
       console.log(error);
+
     }
 
   };
 
   return(
 
-    <div>
+    <div className="min-h-screen bg-gray-100 p-20">
 
-      <h2>Your Cart</h2>
+      <h2 className="text-3xl font-bold mb-6">
+        Your Cart
+      </h2>
 
       {items.length === 0 ? (
-        <p>Cart is empty</p>
+
+        <div className="bg-white p-6 rounded shadow">
+          <p className="text-gray-500">
+            Your cart is empty
+          </p>
+        </div>
+
       ) : (
-        items.map((item)=>(
-          <div key={item._id}>
 
-            <h3>{item.product.name}</h3>
-            <p>₹ {item.product.price}</p>
+        <div className="bg-white shadow rounded-lg overflow-hidden">
 
-            <button onClick={()=>removeItem(item._id)}>
-              Remove
-            </button>
+          <table className="w-full">
 
-            <hr/>
+            <thead className="bg-gray-200">
 
-          </div>
-        ))
+              <tr>
+
+                <th className="p-4 text-left">
+                  Product
+                </th>
+
+                <th className="p-4 text-left">
+                  Price
+                </th>
+
+                <th className="p-4 text-left">
+                  Action
+                </th>
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              {items.map((item)=>(
+
+                <tr 
+                  key={item._id}
+                  className="border-t hover:bg-gray-50"
+                >
+
+                  <td className="p-4">
+                    {item.product.name}
+                  </td>
+
+                  <td className="p-4 text-blue-600 font-semibold">
+                    ₹ {item.product.price}
+                  </td>
+
+                  <td className="p-4">
+
+                    <button
+                      onClick={()=>removeItem(item._id)}
+                      className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                    >
+                      Remove
+                    </button>
+
+                  </td>
+
+                </tr>
+
+              ))}
+
+            </tbody>
+
+          </table>
+
+        </div>
+
       )}
 
-      <button onClick={()=>navigate("/checkout")}>
-        Checkout
-      </button>
+      {items.length > 0 && (
+
+        <div className="mt-6">
+
+          <button
+            onClick={()=>navigate("/checkout")}
+            className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700"
+          >
+            Proceed To Checkout
+          </button>
+
+        </div>
+
+      )}
 
     </div>
 
