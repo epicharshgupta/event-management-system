@@ -71,3 +71,43 @@ exports.updateMembership = async (req,res)=>{
 
   res.json(membership);
 };
+
+exports.deleteUser = async (req,res)=>{
+
+  try{
+
+    await User.findByIdAndDelete(req.params.id);
+
+    res.json({
+      message:"User deleted"
+    });
+
+  }catch(error){
+
+    res.status(500).json({
+      message:"Error deleting user"
+    });
+
+  }
+
+};
+
+exports.deleteVendor = async (req,res)=>{
+
+ try{
+
+  await User.findByIdAndDelete(req.params.id);
+
+  res.json({
+   message:"Vendor deleted"
+  });
+
+ }catch(error){
+
+  res.status(500).json({
+   message:"Error deleting vendor"
+  });
+
+ }
+
+};
