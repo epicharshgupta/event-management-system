@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 function Transactions() {
 
   const [orders, setOrders] = useState([]);
@@ -91,7 +91,7 @@ function Transactions() {
 
               orders.map(order => (
 
-                <tr 
+                <tr
                   key={order._id}
                   className="border-t hover:bg-gray-50"
                 >
@@ -135,6 +135,12 @@ function Transactions() {
                       className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700"
                     >
                       Deliver
+                    </button>
+                    <button
+                      onClick={() => updateStatus(order._id, "Cancelled")}
+                      className="bg-red-600 text-white px-3 py-1 rounded"
+                    >
+                      Cancel
                     </button>
 
                   </td>
