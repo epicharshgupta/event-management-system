@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
+import { toast } from "react-toastify";
 
 function UserOrders() {
 
@@ -28,9 +29,30 @@ function UserOrders() {
     fetchOrders();
   }, []);
 
+  const cancelOrder = async (id) => {
+
+    try {
+
+      await API.delete(`/orders/${id}`);
+
+      toast.success("Order Cancelled");
+
+      fetchOrders();
+
+    } catch (error) {
+
+      console.log("Error cancelling order:", error);
+
+    }
+
+  };
+
   const getStatusStyle = (status) => {
 
     switch (status) {
+
+      case "Order Placed":
+        return "bg-gray-200 text-gray-700";
 
       case "Received":
         return "bg-yellow-200 text-yellow-800";
@@ -39,7 +61,13 @@ function UserOrders() {
         return "bg-blue-200 text-blue-800";
 
       case "Out for Delivery":
+        return "bg-purple-200 text-purple-800";
+
+      case "Delivered":
         return "bg-green-200 text-green-800";
+        
+      case "Cancelled":
+        return "bg-red-200 text-red-800";
 
       default:
         return "bg-gray-200 text-gray-700";
@@ -118,6 +146,19 @@ function UserOrders() {
                 </ul>
 
               </div>
+
+            )}
+
+            {/* ⭐ Cancel Button */}
+
+            {order.status === "Order Placed" && (
+
+              <button
+                onClick={() => cancelOrder(order._id)}
+                className="mt-4 bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600"
+              >
+                Cancel Order
+              </button>
 
             )}
 
